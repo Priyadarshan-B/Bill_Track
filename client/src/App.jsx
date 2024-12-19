@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import AppRoutes from "./routes/routes";
 import { ThemeProviderComponent } from "./components/applayout/dateTheme";
 import Loader from "./components/Loader/loader";
+import './App.css'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
