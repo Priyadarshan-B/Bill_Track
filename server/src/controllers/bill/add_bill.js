@@ -49,14 +49,19 @@ exports.get_bills = async (req, res) => {
   try {
     const sql = `
         SELECT *, 
-        (SELECT COUNT(*) FROM bills WHERE DATE(date_time) = ? AND status = '1') AS count
+        (SELECT COUNT(*) FROM bills WHERE DATE(date_time) = ? AND status = '1') AS bill_count,
+        (SELECT COUNT(*) FROM bills WHERE DATE(date_time) = ? AND status = '2') AS app_count,
+        (SELECT COUNT(*) FROM bills WHERE DATE(date_time) = ? AND status = '0') AS rej_count
         FROM bills
-        WHERE DATE(date_time) = ? AND status = '1';
+        WHERE DATE(date_time) = ? AND entry_status = '1' AND status = '1';
     `;
-    const bills = await query(sql, [date, date]);
-    const count = bills.length > 0 ? bills[0].count : 0;
+    const bills = await query(sql, [date, date, date,date]);
+    const bill_count = bills.length > 0 ? bills[0].bill_count : 0;
+    const app_count = bills.length > 0 ? bills[0].app_count : 0;
+    const rej_count = bills.length > 0 ? bills[0].rej_count : 0;
 
-    res.status(200).json({ count, bills });
+
+    res.status(200).json({ bill_count,app_count,rej_count, bills });
   } catch (err) {
     console.error("Error fetching resources", err);
     res.status(500).json({ error: "Error fetching resources" });
