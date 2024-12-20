@@ -1,21 +1,21 @@
 import React from "react";
 import { Input } from "@nextui-org/react";
+import './textbox.css'
 
-const InputBox = ({ type = "text", value, onChange, placeholder, style, max, min, name }) => {
+const InputBox = ({ type = "text", value, onChange,label, placeholder, style, max, min, name }) => {
   return (
-    <div>
+    <div className="w-full flex flex-col gap-4">
       <Input
         type={type}
         value={value}
+        label={label}
         onChange={(e) => onChange(e)}
         placeholder={placeholder}
-        className="bordered input w-full"
         style={style}
         max={max}
         min={min}
         clearable
         bordered
-        fullWidth
         name={name}
       />
     </div>

@@ -65,7 +65,7 @@ function SideBar({ open, resource, onSidebarItemSelect, handleSideBar }) {
         backgroundColor: "#2a3645",
       }}
     >
-      <p style={{ color: 'white' }} className="a-name">Skill Survey</p>
+      <p style={{ color: 'white' }} className="a-name">Bill Track</p>
       <ul className="list-div">
         {sidebarItems.map((item) => (
           <li
