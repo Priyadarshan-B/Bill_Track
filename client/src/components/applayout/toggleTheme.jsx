@@ -5,7 +5,7 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { useThemeToggle } from "../../components/applayout/dateTheme"; // Ensure the path is correct
 import { ThemeProviderComponent } from "../../components/applayout/dateTheme";
 const lightModeProperties = {
-    "--background-1": "#f4f6fa",
+    "--background-1": "#f8f7f4",
     "--background-2": "#ffffff",
     "--text": "#011627",
     "--table-hover": "#f4f6fa",
@@ -18,7 +18,9 @@ const lightModeProperties = {
     "--head-1": "#2a3645",
     "--pop-button": "#2c7cf3",
     "--error":"#f4f6fa",
-    "--disable-btn":"cdcdcd"
+    "--disable-btn":"cdcdcd",
+    "--nav-text-dis":"#c6c6c6",
+    "--nav-selected":"#e1ffec"
 
 };
 

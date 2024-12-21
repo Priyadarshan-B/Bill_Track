@@ -1,19 +1,28 @@
 import React from "react";
-import { Card,CardHeader, CardBody, Divider } from "@nextui-org/react";
+import { Card, CardHeader, Image, CardBody, Divider } from "@nextui-org/react";
 
-const CountCard = ({ title, count }) => {
+const CountCard = ({ title,imageUrl, subtitle, count }) => {
   return (
     <Card hoverable className="flex justify-between items-center">
-      <div className="p-4 w-[200]">
+      <div className="p-2 w-[200]">
         <CardHeader>
-        <div className="flex flex-col">
-          <p className="text-md">{title}</p>
-          <p className="text-small text-default-500">{title}</p>
-        </div>  
+          <div className="flex gap-3">
+            <Image
+              alt={title}
+              height={40}
+              radius="sm"
+              src={imageUrl}
+              width={40}
+            />
+            <div className="flex flex-col">
+              <p className="text-md">{title}</p>
+              <p className="text-small text-default-500">{subtitle}</p>
+            </div>
+          </div>
         </CardHeader>
-        <Divider/>
+        <Divider />
         <CardBody>
-            <h2>{count}</h2>
+          <h2 className="flex justify-center text-lg font-semibold">{count}</h2>
         </CardBody>
       </div>
     </Card>

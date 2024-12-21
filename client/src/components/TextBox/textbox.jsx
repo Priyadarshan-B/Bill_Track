@@ -2,7 +2,7 @@ import React from "react";
 import { Input } from "@nextui-org/react";
 import './textbox.css'
 
-const InputBox = ({ type = "text", value, onChange,label, placeholder, style, max, min, name }) => {
+const InputBox = ({ type = "text", value, onChange,label, placeholder, style, max, min, name, disabled }) => {
   return (
     <div className="w-full flex flex-col gap-4">
       <Input
@@ -17,6 +17,7 @@ const InputBox = ({ type = "text", value, onChange,label, placeholder, style, ma
         clearable
         bordered
         name={name}
+        disabled={disabled}
       />
     </div>
   );

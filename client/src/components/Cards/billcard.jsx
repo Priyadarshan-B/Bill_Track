@@ -45,7 +45,7 @@ const BillCard = ({ imageUrl, title, subtitle, description, status, date,onPress
       <CardFooter>
         <div className="w-full flex justify-between">
           <p className="text-xs text-default-500 mt-2">Date: {date}</p> 
-          <Chip color={status === '1' ? 'warning' : status === '2' ? 'success' : 'error'}>
+          <Chip className="text-white  font-extrabold " color={status === '1' ? 'warning' : status === '2' ? 'success' : 'danger'}>
             {getStatusLabel(status)}
           </Chip>
         </div>

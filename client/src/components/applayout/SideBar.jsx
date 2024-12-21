@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import BorderColorTwoToneIcon from '@mui/icons-material/BorderColorTwoTone';
-import SpaceDashboardTwoToneIcon from '@mui/icons-material/SpaceDashboardTwoTone';
+import DashboardTwoToneIcon from '@mui/icons-material/DashboardTwoTone';
+import HistoryTwoToneIcon from '@mui/icons-material/HistoryTwoTone';
+import ReceiptLongTwoToneIcon from '@mui/icons-material/ReceiptLongTwoTone';
 import requestApi from "../utils/axios";
 import { decryptData } from "../utils/encrypt";
 import "./styles.css";
 
 function getIconComponent(iconPath) {
   switch (iconPath) {
-    case 'BorderColorTwoToneIcon':
-      return <BorderColorTwoToneIcon style={{ color: '#f57d93', fontSize: '30px' }} className="custom-sidebar-icon" />;
-    case 'SpaceDashboardTwoToneIcon':
-      return <SpaceDashboardTwoToneIcon style={{ color: '#05ce78', fontSize: '30px' }} className="custom-sidebar-icon" />;
+    case 'ReceiptLongTwoToneIcon':
+      return <ReceiptLongTwoToneIcon style={{ color: '#7c7c7c', fontSize: '30px' }} className="custom-sidebar-icon" />;
+    case 'DashboardTwoToneIcon':
+      return <DashboardTwoToneIcon style={{ color: '#7c7c7c', fontSize: '30px' }} className="custom-sidebar-icon" />;
+      case 'HistoryTwoToneIcon':
+        return <HistoryTwoToneIcon style={{ color: '#7c7c7c', fontSize: '30px' }} className="custom-sidebar-icon" />;
     default:
       return null;
   }
@@ -62,10 +65,10 @@ function SideBar({ open, resource, onSidebarItemSelect, handleSideBar }) {
     <div
       className={open ? "app-sidebar sidebar-open" : "app-sidebar"}
       style={{
-        backgroundColor: "#2a3645",
+        backgroundColor: "#ffffff",
       }}
     >
-      <p style={{ color: 'white' }} className="a-name">Bill Track</p>
+      <p style={{ color: 'black' }} className="a-name">Bill Track</p>
       <ul className="list-div">
         {sidebarItems.map((item) => (
           <li

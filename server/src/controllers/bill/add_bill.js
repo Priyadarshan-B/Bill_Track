@@ -46,24 +46,37 @@ exports.get_bills = async (req, res) => {
   if (!date) {
     return res.status(400).json({ error: "Date required." });
   }
+
   try {
-    const sql = `
-        SELECT *, 
-        (SELECT COUNT(*) FROM bills WHERE DATE(date_time) = ? AND status = '1') AS bill_count,
-        (SELECT COUNT(*) FROM bills WHERE DATE(date_time) = ? AND status = '2') AS app_count,
-        (SELECT COUNT(*) FROM bills WHERE DATE(date_time) = ? AND status = '0') AS rej_count
-        FROM bills
-        WHERE DATE(date_time) = ? AND entry_status = '1' AND status = '1';
+    const billsQuery = `
+      SELECT *
+      FROM bills
+      WHERE DATE(date_time) = ? AND bill_details != 'No Bill' AND entry_status = '1' AND status = '1';
     `;
-    const bills = await query(sql, [date, date, date,date]);
-    const bill_count = bills.length > 0 ? bills[0].bill_count : 0;
-    const app_count = bills.length > 0 ? bills[0].app_count : 0;
-    const rej_count = bills.length > 0 ? bills[0].rej_count : 0;
 
+    const countsQuery = `
+      SELECT
+        (SELECT COUNT(*) FROM bills WHERE DATE(date_time) = ? AND bill_details != 'No Bill' AND entry_status = '1') AS bill_count_date,
+        (SELECT COUNT(*) FROM bills WHERE entry_status = '1' AND bill_details != 'No Bill') AS bill_count,
+        (SELECT COUNT(*) FROM bills WHERE entry_status = '2' AND bill_details != 'No Bill') AS app_count,
+        (SELECT COUNT(*) FROM bills WHERE entry_status = '0' AND bill_details != 'No Bill') AS rej_count;
+    `;
 
-    res.status(200).json({ bill_count,app_count,rej_count, bills });
+    const bills = await query(billsQuery, [date]);
+    const counts = await query(countsQuery, [date]);
+
+    const { bill_count_date, bill_count, app_count, rej_count } = counts[0];
+
+    res.status(200).json({
+      bill_count_date: bill_count_date || 0,
+      bill_count: bill_count || 0,
+      app_count: app_count || 0,
+      rej_count: rej_count || 0,
+      bills,
+    });
   } catch (err) {
-    console.error("Error fetching resources", err);
-    res.status(500).json({ error: "Error fetching resources" });
+    console.error("Error fetching bills", err);
+    res.status(500).json({ error: "Error fetching bills" });
   }
 };
+

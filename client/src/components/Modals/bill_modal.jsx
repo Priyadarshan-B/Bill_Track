@@ -22,7 +22,7 @@ const BillDetailsModal = ({ open, bill, onClose, onConfirm }) => {
         </div>
       )}
       <div className='mt-6 text-md font-bold tracking-wide'>
-       Is Bill Received ?
+      Bill Received ?
       </div>
       <div className='mt-3 flex justify-end'>
   <div className='flex-1 max-w-[100px]'>
@@ -32,7 +32,7 @@ const BillDetailsModal = ({ open, bill, onClose, onConfirm }) => {
   </div>
   <div className='flex-1 max-w-[100px]'>
     <Button type="primary" onClick={onConfirm}>
-      Confirm
+      Approve
     </Button>
   </div>
 </div>

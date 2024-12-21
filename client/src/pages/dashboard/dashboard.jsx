@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { DatePicker } from "antd";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import TextField from "@mui/material/TextField";
 import BillCard from "../../components/Cards/billcard";
 import requestApi from "../../components/utils/axios";
 import CountCard from "../../components/Cards/count_card";
@@ -7,6 +9,9 @@ import moment from "moment";
 import toast from "react-hot-toast";
 import SearchBar from "../../components/TextBox/search";
 import BillDetailsModal from "../../components/Modals/bill_modal";
+import approve from '../../assets/approval.png'
+import reject from '../../assets/reject.png'
+import pending from '../../assets/pending.png'
 
 const Dashboard = () => {
   const [selectedDate, setSelectedDate] = useState(moment());
@@ -64,10 +69,10 @@ const Dashboard = () => {
 
   const filteredBills = bills.filter((bill) => {
     const isEntryNoMatch =
-      !isNaN(filterText) && bill.entry_no.toString().includes(filterText); 
+      !isNaN(filterText) && bill.entry_no.toString().includes(filterText);
     const isItemNameMatch = bill.item_name
       .toLowerCase()
-      .includes(filterText.toLowerCase()); 
+      .includes(filterText.toLowerCase());
     return isEntryNoMatch || isItemNameMatch;
   });
 
@@ -88,20 +93,23 @@ const Dashboard = () => {
     <div>
       <div className="p-4 justify-between flex gap-4 items-center">
         <div className="pl-2 pb-5">
-          <div className="flex flex-col justify-center">
+          <LocalizationProvider dateAdapter={AdapterMoment}>
             <DatePicker
               value={selectedDate}
-              onChange={handleDateSelect}
               format="DD-MM-YYYY"
-              placeholder="Select a date"
+              onChange={handleDateSelect}
+              renderInput={(params) => (
+                <TextField {...params} placeholder="Select a date" />
+              )}
             />
-          </div>
+          </LocalizationProvider>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <CountCard title="Pending Bills" count={count.bill_count} />
-          <CountCard title="Approved Bills" count={count.app_count} />
-          <CountCard title="Rejected Bills" count={count.rej_count} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <CountCard title="Pending Bills" count={count.bill_count_date} imageUrl={pending} subtitle={formatDate(selectedDate)}/>
+          <CountCard title="Pending Bills" count={count.bill_count} imageUrl={pending}  subtitle={"Total"}/>
+          <CountCard title="Approved Bills" count={count.app_count}  imageUrl={approve} subtitle={"Total"}/>
+          <CountCard title="Rejected Bills" count={count.rej_count} imageUrl={reject} subtitle={"Total"}/>
         </div>
       </div>
 

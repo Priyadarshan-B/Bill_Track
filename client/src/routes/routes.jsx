@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "../pages/Login/Login";
-import FormBill from "../pages/add_bill/form";
+import BillManager from "../pages/add_bill/bill";
 import Dashboard from "../pages/dashboard/dashboard";
 import AllBills from "../pages/all_bills/all_bills";
 import AppLayout from "../components/applayout/AppLayout";
@@ -21,7 +21,7 @@ const AppRoutes = () => {
             body={
               <Routes>
                 <Route path="dashboard" element={<Dashboard />} />
-                <Route path="add" element={<FormBill />} />
+                <Route path="add" element={<BillManager />} />
                 <Route path="bills" element={<AllBills />} />
               </Routes>
             }
